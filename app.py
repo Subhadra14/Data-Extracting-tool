@@ -6,14 +6,14 @@ from io import BytesIO
 
 # Regex Functions
 def get_ae2(text, instance_keyword):
-    pattern = rf"{re.escape(instance_keyword)}"
+    pattern = rf"\b{re.escape(instance_keyword)}\b"
     match = re.search(pattern, str(text), re.IGNORECASE)
     return match.group(0) if match else None
 
 def get_outer(text, unit_keyword):
     escaped = re.escape(unit_keyword)
     escaped = escaped.replace(r"\ ", r"\s*[-_]*\s*")
-    pattern = rf"{escaped}"
+    pattern = rf"\b{escaped}\b"
     match = re.search(pattern, str(text), re.IGNORECASE)
     return match.group(0) if match else None
 
@@ -125,3 +125,4 @@ if file and instance_keyword and unit_keyword:
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
+
